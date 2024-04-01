@@ -1,0 +1,198 @@
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("https://lifesciencesontario.ca/wp-content/uploads/2018/02/report-background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+
+        .heading {
+            color: black;
+            font-size: 29px;
+            text-align: center;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+<div id="dialog" title="Basic dialog">
+    <br>
+    <h1 class="heading">User Id : {{u_id}}</h1>
+    <h1 class="heading">Code Module : {{cm}}</h1>
+    <h1 class="heading">User Module : {{u_m}}</h1>
+    <h1 class="heading"> Student's Status: {{ prediction_text_}}</h1>
+
+</div>
+<div class="container">
+    <div class="chart-container">
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="genderChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+</div>
+
+<div class="container">
+    <div class="chart-container">
+        <canvas id="ageBandChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="regionChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+</div>
+
+<script>
+    const selectedCodeModule = '{{ cm }}';
+    // Fetch code module distribution data from Flask route
+    fetch('/get_code_module_distribution')
+        .then(response => response.json())
+        .then(data => {
+            const xValues = Object.keys(data);
+            const yValues = Object.values(data);
+            const barColors = ["red", "green", "blue", "orange", "brown", "pink", "violet"];
+
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Code Module Distribution"
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+    // Fetch gender distribution data from Flask route based on selected code module
+     // Assuming you pass the selected code module from Flask
+    fetch(`/get_gender_distribution/${selectedCodeModule}`)
+        .then(response => response.json())
+        .then(data => {
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            const colors = ["blue", "pink"]; // Adjust colors as needed
+
+            new Chart("genderChart", {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        backgroundColor: colors,
+                        data: values
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Gender Distribution"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching gender distribution data:', error));
+    //const selectedCodeModule = '{{ cm }}';  // Assuming you pass the selected code module from Flask
+
+    // Fetch age band distribution data from Flask route
+    fetch(`/get_age_band_distribution/${selectedCodeModule}`)
+        .then(response => response.json())
+        .then(data => {
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            const colors = ["purple", "orange", "green"]; // Adjust colors as needed
+
+            new Chart("ageBandChart", {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        backgroundColor: colors,
+                        data: values
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Age Band Distribution"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+    // Fetch region distribution data from Flask route
+    //const selectedCodeModule = '{{ cm }}';  // Assuming you pass the selected code module from Flask
+
+    // Fetch age band distribution data from Flask route
+    fetch(`/get_region_distribution/${selectedCodeModule}`)
+
+        .then(response => response.json())
+        .then(data => {
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            const colors = ["red", "green", "blue", "orange", "brown", "pink", "violet", "black", "yellow", "grey", "cyan", "purple", "magenta"]; // Adjust colors as needed
+
+            new Chart("regionChart", {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        backgroundColor: colors,
+                        data: values
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Region Distribution"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<html>
+<head>
+<title>Student Performance Prediction</title>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Dialog - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+		window.onerror = function (e) {
+    console.log('Error: ', e);
+  };
+	</script>
+  <script>
+
+	typeof({{prediction_text_}})
+	$( function() {
+    $( "#dialog" ).dialog();
+	})
+
+  </script>
+</head>
+<style>
+    body{
+    background-image: url("https://cdn.wallpapersafari.com/68/66/PLgQbl.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+
+}
+.heading{
+
+    color:#ffffff;
+    font-size: 40px;
+    text-align: center;
+}
+.form-dropdown field{
+   font-size: 60px;
+}
+.table{
+
+   background-color:#e6ffff;
+}
+</style>
+
+<body>
+    <h1 class="heading">STUDENT PERFORMANCE PREDICTION</h1>
+    <table class="table " align="center" cellpadding = "15" >
+    <form action="/" method="POST">
+   <tr>
+    <div>
+          <td>Code_Module</td>
+          <td>
+        <select class="form-dropdown field" name="code">
+           <option value=0> AAA </option>
+           <option value=1> BBB</option>
+           <option value=2> CCC</option>
+           <option value=3> DDD</option>
+           <option value=4> EEE</option>
+           <option value=5> FFF</option>
+		   <option value=6> GGG</option>
+        </select>
+    </td>
+     </div>
+     <tr>
+     <div>
+        <td>Code_Presentation</td>
+        <td>
+        <select class="form-dropdown field" name="presentation">
+           <option value="2013J"> 2013J </option>
+           <option value="2014J"> 2014J</option>
+           <option value="2013B"> 2013B</option>
+           <option value="2014B"> 2014B</option>
+        </select>
+    </td>
+     </div>
+     </tr>
+     <tr>
+        <td>id_student</td>
+        <td><input type="text" name="id_student"  placeholder="Enter id" />
+        </td>
+     </tr>
+     <tr>
+        <td>Gender</td>
+        <td>
+        <input type="radio" name="Gender" value=0 /> Male
+        <input type="radio" name="Gender" value=1 /> Female
+        </td> </tr>
+    <tr>
+        <td>Region</td>
+        <td>
+        <select class="form-dropdown field" name="region">
+
+           <option value=0>East Anglian Region</option>
+           <option value=1>East Midlands Region</option>
+           <option value=2>Ireland</option>
+           <option value=3>London Region</option>
+           <option value=4>North Region </option>
+           <option value=5>North Western Region</option>
+		   <option value=6>Scotland</option>
+           <option value=7>South East Region</option>
+           <option value=8>South Region</option>
+           <option value=9>South West Region</option>
+           <option value=10>Wales</option>
+           <option value=11>West Mdilands Region</option>
+           <option value=12>Yorkshire Region</option>
+
+        </select>
+
+        </td>
+    </tr>
+    <tr>
+        <td>Higher Education</td>
+        <td>
+            <select class="form-dropdown field" name="edu">
+                <option value=0> A Level or Equivalent </option>
+				<option value=1> HE Qualification </option>
+                <option value=2>Lower Than A Level </option>
+				<option value=3>No Formal Equals </option>
+                <option value=4>Post Graduate Qualification </option>
+            </select>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>imd_band</td>
+        <td>
+            <select class="form-dropdown field" name="band">
+                <option value=1>0-10%</option>
+                <option value=2>20-30%</option>
+                <option value=3>30-40%</option>
+                <option value=4>40-50%</option>
+                <option value=5>50-60%</option>
+                <option value=6>60-70%</option>
+                <option value=8>70-80%</option>
+                <option value=9>80-90%</option>
+                <option value=10>90-100%</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Age</td>
+        <td>
+			<select class="form-dropdown field" name="age">
+                <option value=0>0-35</option>
+                <option value=1>35-55</option>
+                <option value=2>55>=</option>
+            </select>
+        </td>
+     </tr>
+
+	<tr>
+        <td>Number of previous attempts</td>
+        <td><input type="text" name="Number of attempts"  placeholder="0" />
+        </td>
+     </tr>
+     <tr>
+        <td>Number of credits</td>
+        <td><input type="text" name="Number of Credits"  placeholder="0" />
+        </td>
+     </tr>
+     <tr>
+        <td>Disability</td>
+        <td>
+        <input type="radio" name="Disability" value=0 />Y
+        <input type="radio" name="Disability" value=1 />N
+        </td> </tr>
+        <tr>
+        <div class="input-field">
+            <td>
+                <button type="submit" class="btn-block btn-large">PREDICT</button>
+            </td>
+
+        </div>
+    </form>
+</div>
+    </table>
+
+
+</body>
+
+</html>
